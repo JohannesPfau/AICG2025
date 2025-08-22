@@ -4696,8 +4696,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -5383,10 +5383,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
+  m_ReferenceResolution: {x: 2560, y: 1440}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -5411,7 +5411,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -6508,8 +6508,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -486.1}
-  m_SizeDelta: {x: 800, y: 100}
+  m_AnchoredPosition: {x: 0, y: -589}
+  m_SizeDelta: {x: 1600, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1557229398
 MonoBehaviour:
@@ -6602,7 +6602,7 @@ MonoBehaviour:
   m_CaretWidth: 1
   m_ReadOnly: 0
   m_RichText: 1
-  m_GlobalFontAsset: {fileID: 0}
+  m_GlobalFontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_OnFocusSelectAll: 1
   m_ResetOnDeActivation: 1
   m_KeepTextSelectionVisible: 0
@@ -6625,7 +6625,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.2}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -8377,8 +8377,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 20
-  m_fontSizeBase: 20
+  m_fontSize: 30
+  m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 0
@@ -9251,8 +9251,8 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   contextSize: 8192
   batchSize: 512
-  model: Qwen3-14B-Q4_K_M.gguf
-  chatTemplate: qwen3
+  model: llama-3.2-3b-instruct-q4_k_m.gguf
+  chatTemplate: llama3 chat
   lora: 
   loraWeights: 
   flashAttention: 0
@@ -9262,9 +9262,9 @@ MonoBehaviour:
   SSLKey: 
   SSLKeyPath: 
   minContextLength: 0
-  maxContextLength: 40960
+  maxContextLength: 131072
   embeddingsOnly: 0
-  embeddingLength: 5120
+  embeddingLength: 3072
 --- !u!4 &2095031886 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4901005176133850, guid: 542c838a581ff744bbddf63ddc75bcb8, type: 3}
@@ -9406,7 +9406,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 93ed208b5f8bef04ebf2e77e85c8d4cd, type: 3}
---- !u!1001 &9058643188407830120
+--- !u!1001 &370569090346043609
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -9414,65 +9414,65 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2869759083331483323, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
-      propertyPath: globalChatInput
-      value: 
-      objectReference: {fileID: 1557229398}
-    - target: {fileID: 3252486953590048940, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 27.375
-      objectReference: {fileID: 0}
-    - target: {fileID: 3252486953590048940, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.061253548
-      objectReference: {fileID: 0}
-    - target: {fileID: 3252486953590048940, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -3.093
-      objectReference: {fileID: 0}
-    - target: {fileID: 3252486953590048940, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3252486953590048940, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3252486953590048940, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3252486953590048940, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3252486953590048940, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3252486953590048940, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3252486953590048940, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5168144289410163121, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
+    - target: {fileID: 1269206694089080970, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
       propertyPath: m_Name
       value: Assignment1_NPC
       objectReference: {fileID: 0}
+    - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 27.375
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.061253548
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.093
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4695618538623892500, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: globalChatInput
+      value: 
+      objectReference: {fileID: 1557229398}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 43c11538dd4a92b40b472729f8fb2bd4, type: 3}
+  m_SourcePrefab: {fileID: 100100000, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 2094366159}
-  - {fileID: 9058643188407830120}
+  - {fileID: 370569090346043609}
   - {fileID: 421675186}
   - {fileID: 971145058}
   - {fileID: 1518334965}
