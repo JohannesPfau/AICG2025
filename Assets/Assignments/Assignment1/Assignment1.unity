@@ -9501,6 +9501,14 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4695618538623892500, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: constrainOn
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4695618538623892500, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
+      propertyPath: textThreshold
+      value: 512
+      objectReference: {fileID: 0}
+    - target: {fileID: 4695618538623892500, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
       propertyPath: globalChatInput
       value: 
       objectReference: {fileID: 1557229398}

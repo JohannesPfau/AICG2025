@@ -1,11 +1,21 @@
+//#define ConstrainDebug
+
 using UnityEngine;
 using UnityEngine.UI;
 using LLMUnity;
 using TMPro;
 using System;
+using NUnit.Framework;
 
 public class Assignment1_Logic : MonoBehaviour
 {
+    [Header("Reply Constraining")]
+    [Tooltip("You know what this does.")]
+    public bool constrainOn = true;
+    [Tooltip("When to start cutting old characters from response.")]
+    public int textThreshold = 512;
+
+    [Header("Refs")]
     public LLMCharacter llmCharacter;
     public Text textbox;
     public TMP_InputField globalChatInput;
@@ -30,8 +40,34 @@ public class Assignment1_Logic : MonoBehaviour
     }
 
     void HandleReply(string reply){
+        if (constrainOn)
+            reply = ConstrainReply(reply);
+
         Debug.Log(reply);
         textbox.text = reply;
+    }
+
+    /// <summary>
+    /// Constrains the reply so that the max_vertices threshold of the text renderer is not exceeded (hopefully)
+    /// </summary>
+    /// <param name="reply"></param>
+    string ConstrainReply(string reply)
+    {
+#if ConstrainDebug
+        Debug.Log("Characters: " + reply.Length.ToString());
+        bool exceededFlag = reply.Length > textThreshold;
+#endif
+        string niceReply = (reply.Length > textThreshold) ? reply.Substring(reply.Length - textThreshold, textThreshold) : reply;
+
+#if ConstrainDebug
+        if (exceededFlag)
+            Debug.Log("niceReply");
+        if (niceReply.Length > textThreshold)
+            Debug.Log("NOPE");
+#endif
+
+        Debug.Assert(niceReply.Length <= textThreshold);
+        return niceReply;
     }
 
     void ReplyCompleted(){
