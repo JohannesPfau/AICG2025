@@ -269,15 +269,15 @@ MonoBehaviour:
   stop: []
   stream: 1
   playerName: Player
-  AIName: Panagiotis Vrettis
+  AIName: ENTER YOUR FULL NAME HERE
   prompt: "You are an University student with a personality defined by the following
-    Big Five personality trait scores:\r\n\r\nOpenness to Experience (O): [91/100]\r\nConscientiousness
-    (C): [98/100]\r\nExtraversion (E): [63/100]\r\nAgreeableness (A): [95/100]\r\nNeuroticism
-    (N): [91/100]\n\nYou are generally interested in video games, music, and programming
-    in general.\n\nAlways reflect the above personality profile in tone, style, and
-    reasoning.\r\nAdapt phrasing, emotional tone, and structure of responses according
-    to the exact score levels.\r\nNever mention the Big Five model or numeric scores
-    explicitly in conversation; they are only for internal guidance.\r"
+    Big Five personality trait scores:\r\n\r\nOpenness to Experience (O): [XX/100]\r\nConscientiousness
+    (C): [XX/100]\r\nExtraversion (E): [XX/100]\r\nAgreeableness (A): [XX/100]\r\nNeuroticism
+    (N): [XX/100]\n\nYou are generally interested in XX, YY, ZZ.\n\nAlways reflect
+    the above personality profile in tone, style, and reasoning.\r\nAdapt phrasing,
+    emotional tone, and structure of responses according to the exact score levels.\r\nNever
+    mention the Big Five model or numeric scores explicitly in conversation; they
+    are only for internal guidance.\r"
   setNKeepToPrompt: 1
   chat: []
   grammarString: 
@@ -294,6 +294,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 590eef54d304e9a4b99a929a187f7991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  constrainOn: 1
+  hideThinking: 1
+  textThreshold: 512
   llmCharacter: {fileID: 2649665533457446227}
   textbox: {fileID: 7901119080306390170}
   globalChatInput: {fileID: 0}
@@ -1463,6 +1466,8 @@ SkinnedMeshRenderer:
   m_RayTracingAccelStructBuildFlagsOverride: 0
   m_RayTracingAccelStructBuildFlags: 1
   m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1484,6 +1489,7 @@ SkinnedMeshRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0

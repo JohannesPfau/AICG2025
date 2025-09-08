@@ -12,6 +12,8 @@ public class Assignment1_Logic : MonoBehaviour
     [Header("Reply Constraining")]
     [Tooltip("You know what this does.")]
     public bool constrainOn = true;
+    [Tooltip("Do not display <think> content which are part of some models.")]
+    public bool hideThinking = true;
     [Tooltip("When to start cutting old characters from response.")]
     public int textThreshold = 512;
 
@@ -40,6 +42,29 @@ public class Assignment1_Logic : MonoBehaviour
     }
 
     void HandleReply(string reply){
+        if (hideThinking)
+        {
+            // Remove all text between <think> and </think> tags
+            while (reply.Contains("<think>"))
+            {
+                int startIndex = reply.IndexOf("<think>");
+                int endIndex = reply.IndexOf("</think>", startIndex);
+                
+                if (endIndex != -1) {
+                    reply = reply.Remove(startIndex, endIndex - startIndex + 8);
+                }
+                else {
+                    reply = reply.Remove(startIndex);
+                    break;
+                }
+            }
+            
+            if (reply.Contains("</think>") && !reply.Contains("<think>")) {
+                int endIndex = reply.IndexOf("</think>");
+                reply = reply.Remove(0, endIndex + 8);
+            }
+        }
+
         if (constrainOn)
             reply = ConstrainReply(reply);
 

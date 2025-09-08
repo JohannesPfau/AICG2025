@@ -9287,14 +9287,14 @@ MonoBehaviour:
   remote: 0
   port: 13333
   numThreads: -1
-  numGPULayers: 10
+  numGPULayers: 1000
   debug: 0
   parallelPrompts: -1
   dontDestroyOnLoad: 1
   contextSize: 8192
   batchSize: 512
-  model: gemma-3-12b-it-Q4_K_M.gguf
-  chatTemplate: gemma
+  model: DeepSeek-R1-Distill-Qwen-14B-Q4_K_M.gguf
+  chatTemplate: chatml
   lora: 
   loraWeights: 
   flashAttention: 0
@@ -9306,7 +9306,7 @@ MonoBehaviour:
   minContextLength: 0
   maxContextLength: 131072
   embeddingsOnly: 0
-  embeddingLength: 3840
+  embeddingLength: 5120
 --- !u!4 &2095031886 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4901005176133850, guid: 542c838a581ff744bbddf63ddc75bcb8, type: 3}
@@ -9499,14 +9499,6 @@ PrefabInstance:
     - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695618538623892500, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
-      propertyPath: constrainOn
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4695618538623892500, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
-      propertyPath: textThreshold
-      value: 512
       objectReference: {fileID: 0}
     - target: {fileID: 4695618538623892500, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
       propertyPath: globalChatInput
