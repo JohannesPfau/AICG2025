@@ -9294,7 +9294,7 @@ MonoBehaviour:
   contextSize: 8192
   batchSize: 512
   model: DeepSeek-R1-Distill-Qwen-14B-Q4_K_M.gguf
-  chatTemplate: chatml
+  chatTemplate: deepseek-v3
   lora: 
   loraWeights: 
   flashAttention: 0
@@ -9462,7 +9462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 27.375
+      value: 27.4
       objectReference: {fileID: 0}
     - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
       propertyPath: m_LocalPosition.y
@@ -9474,7 +9474,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0.95844716
       objectReference: {fileID: 0}
     - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
       propertyPath: m_LocalRotation.x
@@ -9482,7 +9482,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0.28527018
       objectReference: {fileID: 0}
     - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
       propertyPath: m_LocalRotation.z
@@ -9494,7 +9494,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: -33.15
       objectReference: {fileID: 0}
     - target: {fileID: 2453122714006301828, guid: 444b33c59ee9e53468b39c7b0750f0a1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z

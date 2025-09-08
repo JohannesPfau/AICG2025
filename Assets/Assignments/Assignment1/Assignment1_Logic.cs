@@ -12,14 +12,15 @@ public class Assignment1_Logic : MonoBehaviour
     [Header("Reply Constraining")]
     [Tooltip("You know what this does.")]
     public bool constrainOn = true;
-    [Tooltip("Do not display <think> content which are part of some models.")]
-    public bool hideThinking = true;
+    [Tooltip("Move text in <think> tags to thinkbox.")]
+    public bool moveThinkingToThinkbox = true;
     [Tooltip("When to start cutting old characters from response.")]
     public int textThreshold = 512;
 
     [Header("Refs")]
     public LLMCharacter llmCharacter;
     public Text textbox;
+    public Text thinkbox;
     public TMP_InputField globalChatInput;
     long timestampStart = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
     public GameObject loadingUI;
@@ -31,6 +32,7 @@ public class Assignment1_Logic : MonoBehaviour
         globalChatInput.onSubmit.AddListener(onInputFieldSubmit);
         Debug.Log(llmCharacter.prompt);
         textbox.text = "";
+        thinkbox.text = "";
         // string message = "Hello! Whats your name?";
         // _ = llmCharacter.Chat(message, HandleReply, ReplyCompleted);
     }
@@ -42,33 +44,51 @@ public class Assignment1_Logic : MonoBehaviour
     }
 
     void HandleReply(string reply){
-        if (hideThinking)
+        Debug.Log(reply);
+        if (moveThinkingToThinkbox)
         {
-            // Remove all text between <think> and </think> tags
+            string thinkingContent = "";
+            
             while (reply.Contains("<think>"))
             {
                 int startIndex = reply.IndexOf("<think>");
                 int endIndex = reply.IndexOf("</think>", startIndex);
                 
                 if (endIndex != -1) {
+                    string thinkText = reply.Substring(startIndex + 7, endIndex - startIndex - 7);
+                    thinkingContent += thinkText + "\n";
                     reply = reply.Remove(startIndex, endIndex - startIndex + 8);
                 }
                 else {
+                    // No closing tag found, extract everything from <think> to the end
+                    string thinkText = reply.Substring(startIndex + 7);
+                    thinkingContent += thinkText + "\n";
+                    
+                    // Remove everything from <think> to the end
                     reply = reply.Remove(startIndex);
                     break;
                 }
             }
             
+            // Handle case where there's only a closing </think> tag without opening <think>
             if (reply.Contains("</think>") && !reply.Contains("<think>")) {
                 int endIndex = reply.IndexOf("</think>");
+                string thinkText = reply.Substring(0, endIndex);
+                thinkingContent += thinkText + "\n";
+                
+                // Remove everything before and including </think>
                 reply = reply.Remove(0, endIndex + 8);
             }
+            
+            // Display the thinking content in thinkbox
+            if (constrainOn)
+                thinkingContent = ConstrainReply(thinkingContent);
+            thinkbox.text = thinkingContent.TrimEnd('\n');
         }
 
         if (constrainOn)
             reply = ConstrainReply(reply);
 
-        Debug.Log(reply);
         textbox.text = reply;
     }
 
