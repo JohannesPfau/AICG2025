@@ -5262,6 +5262,7 @@ MonoBehaviour:
   sprite_Angry: {fileID: 21300000, guid: e71bc78f408aacd4d88395512fa67dcf, type: 3}
   sprite_Surprised: {fileID: 21300000, guid: 0a9a76feebe553c448df18b5f0f54f6c, type: 3}
   expressionTransform: {fileID: 2006363570}
+  currentExpression: Neutral
 --- !u!4 &1163620040 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4962321366049226, guid: 9f10b22055a25bd4492014644d0ef34d, type: 3}
@@ -8071,6 +8072,7 @@ MonoBehaviour:
   sprite_Angry: {fileID: 21300000, guid: e71bc78f408aacd4d88395512fa67dcf, type: 3}
   sprite_Surprised: {fileID: 21300000, guid: 0a9a76feebe553c448df18b5f0f54f6c, type: 3}
   expressionTransform: {fileID: 1824660988}
+  currentExpression: Neutral
 --- !u!4 &1729982778 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4956043614827810, guid: 7939d7d0228420b4485c5a07b62b54d0, type: 3}
@@ -8760,7 +8762,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 0a9a76feebe553c448df18b5f0f54f6c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: e93f8a6351a72bc4f8e1a0bfb8571cd7, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10008,8 +10010,8 @@ MonoBehaviour:
   dontDestroyOnLoad: 1
   contextSize: 8192
   batchSize: 512
-  model: gemma-3-12b-it-Q4_K_M.gguf
-  chatTemplate: gemma
+  model: phi-4-Q4_K_M.gguf
+  chatTemplate: phi-4
   lora: 
   loraWeights: 
   flashAttention: 0
@@ -10019,9 +10021,9 @@ MonoBehaviour:
   SSLKey: 
   SSLKeyPath: 
   minContextLength: 0
-  maxContextLength: 131072
+  maxContextLength: 16384
   embeddingsOnly: 0
-  embeddingLength: 3840
+  embeddingLength: 5120
 --- !u!114 &2094366161
 MonoBehaviour:
   m_ObjectHideFlags: 0
