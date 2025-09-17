@@ -20,31 +20,109 @@ public class Assignment1_Logic : MonoBehaviour
     [Header("Refs")]
     public LLMCharacter llmCharacter;
     public Text textbox;
+    public Text namebox;
     public Text thinkbox;
     public TMP_InputField globalChatInput;
     long timestampStart = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
     public GameObject loadingUI;
+    public GameObject conversationPartner;
+    public bool isConversationInitiator = false;
+    string currentText = "";
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         // globalChatInput.interactable = false;
+        if (!globalChatInput)
+            globalChatInput = GameObject.FindGameObjectWithTag("GlobalChatbox").GetComponentInChildren<TMP_InputField>();
         globalChatInput.onSubmit.AddListener(onInputFieldSubmit);
         Debug.Log(llmCharacter.prompt);
+        if(!textbox)
+            textbox = GetComponentInChildren<Text>();
         textbox.text = "";
+        if(!namebox)
+            namebox = GetComponentsInChildren<Text>()[1];
+        namebox.text = GetComponent<LLMCharacter>().AIName;
+        if (!thinkbox)
+            thinkbox = GetComponentsInChildren<Text>()[2];
         thinkbox.text = "";
         // string message = "Hello! Whats your name?";
         // _ = llmCharacter.Chat(message, HandleReply, ReplyCompleted);
+        if(!conversationPartner)
+            // Find the closest GameObject tagged "NPC" to this one, skipping those with a conversation partner already set
+            {
+                GameObject[] npcs = GameObject.FindGameObjectsWithTag("NPC");
+                GameObject closest = null;
+                float minDist = float.MaxValue;
+                Vector3 myPos = transform.position;
+                foreach (GameObject npc in npcs)
+                {
+                    if (npc == this.gameObject) continue;
+                    Assignment1_Logic npcLogic = npc.GetComponent<Assignment1_Logic>();
+                    if (npcLogic != null && npcLogic.conversationPartner != null) continue;
+                    float dist = Vector3.Distance(myPos, npc.transform.position);
+                    if (dist < minDist)
+                    {
+                        minDist = dist;
+                        closest = npc;
+                    }
+                }
+                conversationPartner = closest;
+                closest.GetComponent<Assignment1_Logic>().conversationPartner = this.gameObject;
+                transform.LookAt(conversationPartner.transform);
+                conversationPartner.transform.LookAt(this.transform);
+                isConversationInitiator = true;
+
+                // Find which number this NPC is of all NPC GameObjects, then delay conversation start
+                int myIndex = -1;
+                for (int i = 0; i < npcs.Length; i++)
+                {
+                    if (npcs[i] == this.gameObject)
+                    {
+                        myIndex = i;
+                        break;
+                    }
+                }
+                Debug.Log("This NPC's index: " + myIndex + ", starting conversation after: " + myIndex * 1);
+                Invoke(nameof(startConversation), myIndex * 1);
+            }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        // Find all Canvas components in children and set their global Y rotation to 0
+        Canvas[] canvases = GetComponentsInChildren<Canvas>(true);
+        foreach (Canvas canvas in canvases)
+        {
+            Vector3 euler = canvas.transform.parent.rotation.eulerAngles;
+            canvas.transform.parent.rotation = Quaternion.Euler(euler.x, 0f, euler.z);
+        }
     }
 
-    void HandleReply(string reply){
-        Debug.Log(reply);
+    void startConversation()
+    {
+        if(isConversationInitiator) {
+            if(GameObject.FindGameObjectWithTag("LLM").GetComponent<LLMLogic>().isBusy) {
+                Invoke(nameof(startConversation), 5);
+                return;
+            }
+
+            GameObject.FindGameObjectWithTag("LLM").GetComponent<LLMLogic>().isBusy = true;
+            Debug.Log("Starting conversation");
+            string message = "Hello! Who are you? Tell me something about yourself!";
+            currentText = message;
+            textbox.text = message;
+            Debug.Log(message);
+            conversationPartner.GetComponent<Assignment1_Logic>().onInputFieldSubmit(message);
+            // _ = llmCharacter.Chat(message, HandleReply, ReplyCompleted);
+            // loadingUI.SetActive(true);
+        }
+    }
+
+    public void HandleReply(string reply){
+        //Debug.Log(reply);
+        currentText = reply;
         if (moveThinkingToThinkbox)
         {
             string thinkingContent = "";
@@ -115,17 +193,22 @@ public class Assignment1_Logic : MonoBehaviour
         return niceReply;
     }
 
-    void ReplyCompleted(){
-        Debug.Log("The AI replied");
-        
+    void ReplyCompleted()
+    {
+        Debug.Log(GetComponent<LLMCharacter>().AIName + " : " + currentText);
+        GameObject.FindGameObjectWithTag("LLM").GetComponent<LLMLogic>().isBusy = false;
+
         llmCharacter.Save("Assignment1_chatlog" + timestampStart);
         globalChatInput.interactable = true;
         globalChatInput.Select();
         loadingUI.SetActive(false);
+        
+        if(conversationPartner)
+            conversationPartner.GetComponent<Assignment1_Logic>().onInputFieldSubmit(currentText);
     }
 
     void onInputFieldSubmit(string message){
-        Debug.Log(message);
+        //Debug.Log(message);
         _ = llmCharacter.Chat(message, HandleReply, ReplyCompleted);
         globalChatInput.interactable = false;
         globalChatInput.text = "";
