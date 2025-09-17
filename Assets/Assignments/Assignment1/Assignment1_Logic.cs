@@ -33,6 +33,8 @@ public class Assignment1_Logic : MonoBehaviour
         if (!globalChatInput)
             globalChatInput = GameObject.FindGameObjectWithTag("GlobalChatbox").GetComponentInChildren<TMP_InputField>();
         globalChatInput.onSubmit.AddListener(onInputFieldSubmit);
+
+        // llmCharacter.prompt += "\nIMPORTANT: After every message, add a <expression> tag with the expression of the character, based on the content of the message. The expression can be Joy, Sad, Angry, Surprised, or Neutral.";
         Debug.Log(llmCharacter.prompt);
         if(!textbox)
             textbox = GetComponentInChildren<Text>();
@@ -85,7 +87,7 @@ public class Assignment1_Logic : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Find all Canvas components in children and set their global Y rotation to 0
+        // Find all Canvas components in children and set their global Y rotation to face the camera
         Canvas[] canvases = GetComponentsInChildren<Canvas>(true);
         foreach (Canvas canvas in canvases)
         {
@@ -191,7 +193,8 @@ public class Assignment1_Logic : MonoBehaviour
         loadingUI.SetActive(false);
 
         // TODO: Get proper expression from the LLM#
-        GetComponent<Assignment2_Logic>().SetRandomExpression();
+        //GetComponent<Assignment2_Logic>().SetRandomExpression();
+        GetComponent<Assignment2_Logic>().ClassifyEmotion(currentText);
         
         if(conversationPartner)
             conversationPartner.GetComponent<Assignment1_Logic>().onInputFieldSubmit(currentText);

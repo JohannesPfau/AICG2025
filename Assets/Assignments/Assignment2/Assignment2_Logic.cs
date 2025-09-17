@@ -1,3 +1,4 @@
+using LLMUnity;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,6 +10,7 @@ public class Assignment2_Logic : MonoBehaviour
     public Sprite sprite_Angry;
     public Sprite sprite_Surprised;
     public Transform expressionTransform;
+    public string currentExpression = "Neutral";
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -23,8 +25,29 @@ public class Assignment2_Logic : MonoBehaviour
         
     }
 
+    public void ClassifyEmotion(string message)
+    {
+        GameObject.FindGameObjectWithTag("EmotionClassifier").GetComponent<LLMCharacter>().Chat(message, EstimateExpression, HandleExpression);
+        //GameObject.FindGameObjectWithTag("EmotionClassifier").GetComponent<LLMCharacter>().Chat("WOW What was that??", EstimateExpression, HandleExpression); // correctly resolves to "Surprised"
+        //GameObject.FindGameObjectWithTag("EmotionClassifier").GetComponent<LLMCharacter>().Chat("I hate my life, everything is so depressing.", EstimateExpression, HandleExpression); // correctly resolves to "Sad"
+        //GameObject.FindGameObjectWithTag("EmotionClassifier").GetComponent<LLMCharacter>().Chat("I WANT TO DESTROY EVERYTHING!", EstimateExpression, HandleExpression); // correctly resolves to "Angry"
+        //GameObject.FindGameObjectWithTag("EmotionClassifier").GetComponent<LLMCharacter>().Chat("I'm having so much fun in this lecture!!!", EstimateExpression, HandleExpression); // correctly resolves to "Joy"
+        //GameObject.FindGameObjectWithTag("EmotionClassifier").GetComponent<LLMCharacter>().Chat("I'm whatever.", EstimateExpression, HandleExpression); // correctly resolves to "Neutral"
+    }
+
+    public void EstimateExpression(string message)
+    {
+        currentExpression = message;
+    }
+
+    public void HandleExpression()
+    {
+        SetExpression(currentExpression);
+    }
+
     public void SetExpression(string expression)
     {
+        Debug.Log("Trying to set expression to: " + expression);
         if (expressionTransform)
         {
             Sprite selectedSprite;
