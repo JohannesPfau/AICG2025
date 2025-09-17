@@ -12,8 +12,6 @@ public class Assignment1_Logic : MonoBehaviour
     [Header("Reply Constraining")]
     [Tooltip("You know what this does.")]
     public bool constrainOn = true;
-    [Tooltip("Move text in <think> tags to thinkbox.")]
-    public bool moveThinkingToThinkbox = true;
     [Tooltip("When to start cutting old characters from response.")]
     public int textThreshold = 512;
 
@@ -21,7 +19,6 @@ public class Assignment1_Logic : MonoBehaviour
     public LLMCharacter llmCharacter;
     public Text textbox;
     public Text namebox;
-    public Text thinkbox;
     public TMP_InputField globalChatInput;
     long timestampStart = DateTimeOffset.UtcNow.ToUnixTimeSeconds();
     public GameObject loadingUI;
@@ -43,9 +40,6 @@ public class Assignment1_Logic : MonoBehaviour
         if(!namebox)
             namebox = GetComponentsInChildren<Text>()[1];
         namebox.text = GetComponent<LLMCharacter>().AIName;
-        if (!thinkbox)
-            thinkbox = GetComponentsInChildren<Text>()[2];
-        thinkbox.text = "";
         // string message = "Hello! Whats your name?";
         // _ = llmCharacter.Chat(message, HandleReply, ReplyCompleted);
         if(!conversationPartner)
@@ -123,51 +117,44 @@ public class Assignment1_Logic : MonoBehaviour
     public void HandleReply(string reply){
         //Debug.Log(reply);
         currentText = reply;
-        if (moveThinkingToThinkbox)
+        string textboxContent = "";
+        
+        while (reply.Contains("<think>"))
         {
-            string thinkingContent = "";
+            int startIndex = reply.IndexOf("<think>");
+            int endIndex = reply.IndexOf("</think>", startIndex);
             
-            while (reply.Contains("<think>"))
-            {
-                int startIndex = reply.IndexOf("<think>");
-                int endIndex = reply.IndexOf("</think>", startIndex);
-                
-                if (endIndex != -1) {
-                    string thinkText = reply.Substring(startIndex + 7, endIndex - startIndex - 7);
-                    thinkingContent += thinkText + "\n";
-                    reply = reply.Remove(startIndex, endIndex - startIndex + 8);
-                }
-                else {
-                    // No closing tag found, extract everything from <think> to the end
-                    string thinkText = reply.Substring(startIndex + 7);
-                    thinkingContent += thinkText + "\n";
-                    
-                    // Remove everything from <think> to the end
-                    reply = reply.Remove(startIndex);
-                    break;
-                }
+            if (endIndex != -1) {
+                string thinkText = reply.Substring(startIndex + 7, endIndex - startIndex - 7);
+                textboxContent += "<color=#36FFAD>" + thinkText + "</color>\n";
+                reply = reply.Remove(startIndex, endIndex - startIndex + 8);
             }
-            
-            // Handle case where there's only a closing </think> tag without opening <think>
-            if (reply.Contains("</think>") && !reply.Contains("<think>")) {
-                int endIndex = reply.IndexOf("</think>");
-                string thinkText = reply.Substring(0, endIndex);
-                thinkingContent += thinkText + "\n";
+            else {
+                // No closing tag found, extract everything from <think> to the end
+                string thinkText = reply.Substring(startIndex + 7);
+                textboxContent += "<color=#36FFAD>" + thinkText + "</color>\n";
                 
-                // Remove everything before and including </think>
-                reply = reply.Remove(0, endIndex + 8);
+                // Remove everything from <think> to the end
+                reply = reply.Remove(startIndex);
+                break;
             }
-            
-            // Display the thinking content in thinkbox
-            if (constrainOn)
-                thinkingContent = ConstrainReply(thinkingContent);
-            thinkbox.text = thinkingContent.TrimEnd('\n');
         }
-
+        
+        // Handle case where there's only a closing </think> tag without opening <think>
+        if (reply.Contains("</think>") && !reply.Contains("<think>")) {
+            int endIndex = reply.IndexOf("</think>");
+            string thinkText = reply.Substring(0, endIndex);
+            textboxContent += "<color=#36FFAD>" + thinkText + "</color>\n";
+            
+            // Remove everything before and including </think>
+            reply = reply.Remove(0, endIndex + 8);
+        }
+        
+        // Add the thinking content to textbox with color formatting
+        textboxContent += reply;
         if (constrainOn)
-            reply = ConstrainReply(reply);
-
-        textbox.text = reply;
+            textboxContent = ConstrainReply(textboxContent);
+        textbox.text = textboxContent;
     }
 
     /// <summary>
