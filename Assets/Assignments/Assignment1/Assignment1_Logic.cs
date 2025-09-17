@@ -189,6 +189,9 @@ public class Assignment1_Logic : MonoBehaviour
         globalChatInput.interactable = true;
         globalChatInput.Select();
         loadingUI.SetActive(false);
+
+        // TODO: Get proper expression from the LLM#
+        GetComponent<Assignment2_Logic>().SetRandomExpression();
         
         if(conversationPartner)
             conversationPartner.GetComponent<Assignment1_Logic>().onInputFieldSubmit(currentText);
